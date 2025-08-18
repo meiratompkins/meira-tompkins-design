@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initTypewriter();
     initContactForm();
     initThemeToggle();
-    initAuroraEffect();
 });
 
 // Navigation functionality
@@ -154,18 +153,7 @@ function initScrollAnimations() {
     const animateElements = document.querySelectorAll('.work-card, .services-content, .section-header, .cta-content');
     animateElements.forEach(el => observer.observe(el));
 
-    // Parallax effect for hero section
-    const hero = document.querySelector('.hero');
-    if (hero) {
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const parallax = hero.querySelector('.hero-visual');
-            if (parallax) {
-                const speed = scrolled * 0.5;
-                parallax.style.transform = `translateY(${speed}px)`;
-            }
-        });
-    }
+    // Parallax effect removed to keep hero visual static
 }
 
 // Typewriter effect for hero title
@@ -414,41 +402,4 @@ if ('serviceWorker' in navigator) {
                 console.log('SW registration failed: ', registrationError);
             });
     });
-}
-
-// Aurora Cursor Effect
-function initAuroraEffect() {
-    const hero = document.querySelector('.hero');
-    
-    if (!hero) return;
-    
-    let auroraBlob1, auroraBlob2;
-    
-    // Check if running on mobile device
-    const isMobile = window.innerWidth <= 768 || /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
-    // Only initialize on desktop
-    if (!isMobile) {
-        hero.addEventListener('mousemove', handleMouseMove);
-        hero.addEventListener('mouseenter', showAurora);
-        hero.addEventListener('mouseleave', hideAurora);
-    }
-    
-    function handleMouseMove(e) {
-        const rect = hero.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        // Get the pseudo-elements (we'll use CSS custom properties)
-        hero.style.setProperty('--aurora-x', `${x}px`);
-        hero.style.setProperty('--aurora-y', `${y}px`);
-    }
-    
-    function showAurora() {
-        hero.classList.add('aurora-active');
-    }
-    
-    function hideAurora() {
-        hero.classList.remove('aurora-active');
-    }
 }
