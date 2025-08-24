@@ -35,6 +35,7 @@
     color: var(--text-primary);
     margin-bottom: var(--space-md);
     line-height: 1.2;
+    text-shadow: none;
 }
 
 .services-description {
