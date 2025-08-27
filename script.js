@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initTypewriter();
     initContactForm();
     initThemeToggle();
+    initFloatingNavigation();
+    initMobileFAB();
 });
 
 // Navigation functionality
@@ -156,32 +158,10 @@ function initScrollAnimations() {
     // Parallax effect removed to keep hero visual static
 }
 
-// Typewriter effect for hero title
+// Typewriter effect for hero title (disabled)
 function initTypewriter() {
-    const titleElement = document.querySelector('.title-accent');
-    if (!titleElement) return;
-
-    const text = titleElement.textContent;
-    titleElement.textContent = '';
-    titleElement.style.borderRight = '2px solid var(--accent-color)';
-    
-    let index = 0;
-    
-    function typeWriter() {
-        if (index < text.length) {
-            titleElement.textContent += text.charAt(index);
-            index++;
-            setTimeout(typeWriter, 100);
-        } else {
-            // Remove cursor after typing is complete
-            setTimeout(() => {
-                titleElement.style.borderRight = 'none';
-            }, 1000);
-        }
-    }
-    
-    // Start typewriter effect after a delay
-    setTimeout(typeWriter, 1000);
+    // Animation disabled - text will appear immediately
+    return;
 }
 
 // Contact form handling
@@ -390,6 +370,289 @@ window.addEventListener('load', function() {
     // Add loaded class to body for CSS animations
     document.body.classList.add('loaded');
 });
+
+// Floating Navigation for About Page
+function initFloatingNavigation() {
+    const floatingNav = document.getElementById('floating-nav');
+    const progressBar = document.getElementById('progress-bar');
+    const navItems = document.querySelectorAll('.floating-nav .nav-item');
+    
+    // Only initialize on about page
+    if (!floatingNav) return;
+    
+    // Get all sections
+    const sections = [
+        { id: 'hero', element: document.getElementById('hero') },
+        { id: 'expertise', element: document.getElementById('expertise') },
+        { id: 'philosophy', element: document.getElementById('philosophy') },
+        { id: 'collaboration', element: document.getElementById('collaboration') },
+        { id: 'beyond', element: document.getElementById('beyond') },
+        { id: 'connect', element: document.getElementById('connect') }
+    ].filter(section => section.element);
+    
+    // Show floating nav after scrolling a bit
+    function updateFloatingNav() {
+        const scrolled = window.pageYOffset;
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        
+        // Show nav after scrolling 200px
+        if (scrolled > 200) {
+            floatingNav.classList.add('visible');
+        } else {
+            floatingNav.classList.remove('visible');
+        }
+        
+        // Update progress bar
+        const progress = (scrolled / (documentHeight - windowHeight)) * 100;
+        progressBar.style.width = Math.min(progress, 100) + '%';
+        
+        // Update active section
+        updateActiveSection();
+    }
+    
+    function updateActiveSection() {
+        const scrollPosition = window.pageYOffset + 200;
+        let activeSection = sections[0];
+        
+        // Find current section
+        sections.forEach(section => {
+            if (section.element.offsetTop <= scrollPosition) {
+                activeSection = section;
+            }
+        });
+        
+        // Update active nav item
+        navItems.forEach(item => {
+            item.classList.remove('active');
+            if (item.getAttribute('data-section') === activeSection.id) {
+                item.classList.add('active');
+            }
+        });
+    }
+    
+    // Handle navigation clicks
+    navItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                const headerOffset = 100;
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    
+    // Add scroll listener with throttling
+    let ticking = false;
+    function throttledUpdate() {
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                updateFloatingNav();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }
+    
+    window.addEventListener('scroll', throttledUpdate);
+    
+    // Initial update
+    updateFloatingNav();
+}
+
+// Mobile FAB Navigation
+function initMobileFAB() {
+    const floatingFAB = document.getElementById('floating-fab');
+    const sectionModal = document.getElementById('section-modal');
+    const modalClose = document.getElementById('modal-close');
+    const fabNumber = document.getElementById('fab-number');
+    const modalProgressBar = document.getElementById('modal-progress-bar');
+    const modalSectionItems = document.querySelectorAll('.modal-section-item');
+    
+    // Only initialize on about page with mobile screen
+    if (!floatingFAB || !sectionModal) return;
+    
+    // Get all sections
+    const sections = [
+        { id: 'hero', element: document.getElementById('hero') },
+        { id: 'expertise', element: document.getElementById('expertise') },
+        { id: 'philosophy', element: document.getElementById('philosophy') },
+        { id: 'collaboration', element: document.getElementById('collaboration') },
+        { id: 'beyond', element: document.getElementById('beyond') },
+        { id: 'connect', element: document.getElementById('connect') }
+    ].filter(section => section.element);
+    
+    let currentSectionIndex = 0;
+    
+    function updateFABAndModal() {
+        const scrolled = window.pageYOffset;
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        
+        // Show FAB after scrolling 200px (only on mobile)
+        if (window.innerWidth <= 1024) {
+            if (scrolled > 200) {
+                floatingFAB.classList.add('visible');
+            } else {
+                floatingFAB.classList.remove('visible');
+            }
+        }
+        
+        // Update progress bar
+        const progress = (scrolled / (documentHeight - windowHeight)) * 100;
+        modalProgressBar.style.width = Math.min(progress, 100) + '%';
+        
+        // Update active section
+        updateActiveMobileSection();
+    }
+    
+    function updateActiveMobileSection() {
+        const scrollPosition = window.pageYOffset + 200;
+        let activeSection = sections[0];
+        let activeSectionIndex = 0;
+        
+        // Find current section
+        sections.forEach((section, index) => {
+            if (section.element.offsetTop <= scrollPosition) {
+                activeSection = section;
+                activeSectionIndex = index;
+            }
+        });
+        
+        currentSectionIndex = activeSectionIndex;
+        
+        // Update FAB number
+        fabNumber.textContent = activeSectionIndex + 1;
+        
+        // Update active modal section item
+        modalSectionItems.forEach(item => {
+            item.classList.remove('active');
+            if (item.getAttribute('data-section') === activeSection.id) {
+                item.classList.add('active');
+            }
+        });
+    }
+    
+    function openModal() {
+        sectionModal.classList.add('visible');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeModal() {
+        sectionModal.classList.remove('visible');
+        document.body.style.overflow = '';
+    }
+    
+    // FAB click to open modal
+    floatingFAB.addEventListener('click', openModal);
+    
+    // Close modal events
+    modalClose.addEventListener('click', closeModal);
+    
+    // Close modal when clicking backdrop
+    sectionModal.addEventListener('click', function(e) {
+        if (e.target === sectionModal) {
+            closeModal();
+        }
+    });
+    
+    // Handle modal section clicks
+    modalSectionItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                closeModal();
+                
+                // Wait for modal to close, then scroll
+                setTimeout(() => {
+                    const headerOffset = 100;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }, 300);
+            }
+        });
+    });
+    
+    // Handle swipe down to close modal
+    let startY = 0;
+    let currentY = 0;
+    let isDragging = false;
+    
+    const modalContent = sectionModal.querySelector('.modal-content');
+    
+    modalContent.addEventListener('touchstart', function(e) {
+        startY = e.touches[0].clientY;
+        isDragging = true;
+    });
+    
+    modalContent.addEventListener('touchmove', function(e) {
+        if (!isDragging) return;
+        
+        currentY = e.touches[0].clientY;
+        const deltaY = currentY - startY;
+        
+        if (deltaY > 0) {
+            modalContent.style.transform = `translateY(${deltaY}px)`;
+        }
+    });
+    
+    modalContent.addEventListener('touchend', function(e) {
+        if (!isDragging) return;
+        
+        const deltaY = currentY - startY;
+        
+        if (deltaY > 150) {
+            closeModal();
+        }
+        
+        modalContent.style.transform = 'translateY(0)';
+        isDragging = false;
+    });
+    
+    // Escape key to close modal
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && sectionModal.classList.contains('visible')) {
+            closeModal();
+        }
+    });
+    
+    // Add scroll listener with throttling
+    let ticking = false;
+    function throttledMobileUpdate() {
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                updateFABAndModal();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }
+    
+    window.addEventListener('scroll', throttledMobileUpdate);
+    window.addEventListener('resize', throttledMobileUpdate);
+    
+    // Initial update
+    updateFABAndModal();
+}
 
 // Service Worker registration (for PWA features)
 if ('serviceWorker' in navigator) {

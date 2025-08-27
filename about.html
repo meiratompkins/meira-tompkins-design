@@ -40,8 +40,110 @@
         </div>
     </nav>
 
+    <!-- Floating Section Navigation -->
+    <div class="floating-nav" id="floating-nav">
+        <div class="nav-header">
+            <span class="nav-title">Sections</span>
+            <div class="nav-progress">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+        </div>
+        <nav class="nav-links">
+            <a href="#hero" class="nav-item active" data-section="hero">
+                <span class="nav-dot"></span>
+                <span class="nav-label">Intro</span>
+            </a>
+            <a href="#expertise" class="nav-item" data-section="expertise">
+                <span class="nav-dot"></span>
+                <span class="nav-label">Expertise</span>
+            </a>
+            <a href="#philosophy" class="nav-item" data-section="philosophy">
+                <span class="nav-dot"></span>
+                <span class="nav-label">Philosophy</span>
+            </a>
+            <a href="#collaboration" class="nav-item" data-section="collaboration">
+                <span class="nav-dot"></span>
+                <span class="nav-label">Working</span>
+            </a>
+            <a href="#beyond" class="nav-item" data-section="beyond">
+                <span class="nav-dot"></span>
+                <span class="nav-label">Beyond</span>
+            </a>
+            <a href="#connect" class="nav-item" data-section="connect">
+                <span class="nav-dot"></span>
+                <span class="nav-label">Connect</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- Mobile FAB Navigation -->
+    <button class="floating-fab" id="floating-fab">
+        <div class="fab-content">
+            <div class="fab-number" id="fab-number">1</div>
+            <div class="fab-total">of 6</div>
+        </div>
+    </button>
+
+    <!-- Mobile Section Modal -->
+    <div class="section-modal" id="section-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-handle"></div>
+                <h3 class="modal-title">Page Sections</h3>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-sections">
+                <a href="#hero" class="modal-section-item active" data-section="hero">
+                    <div class="modal-section-dot"></div>
+                    <div class="modal-section-info">
+                        <div class="modal-section-title">Introduction</div>
+                        <div class="modal-section-subtitle">Welcome & overview</div>
+                    </div>
+                </a>
+                <a href="#expertise" class="modal-section-item" data-section="expertise">
+                    <div class="modal-section-dot"></div>
+                    <div class="modal-section-info">
+                        <div class="modal-section-title">Digital Design Expertise</div>
+                        <div class="modal-section-subtitle">My skills & experience</div>
+                    </div>
+                </a>
+                <a href="#philosophy" class="modal-section-item" data-section="philosophy">
+                    <div class="modal-section-dot"></div>
+                    <div class="modal-section-info">
+                        <div class="modal-section-title">My Design Philosophy</div>
+                        <div class="modal-section-subtitle">Core principles & approach</div>
+                    </div>
+                </a>
+                <a href="#collaboration" class="modal-section-item" data-section="collaboration">
+                    <div class="modal-section-dot"></div>
+                    <div class="modal-section-info">
+                        <div class="modal-section-title">Working Together</div>
+                        <div class="modal-section-subtitle">What it's like to work with me</div>
+                    </div>
+                </a>
+                <a href="#beyond" class="modal-section-item" data-section="beyond">
+                    <div class="modal-section-dot"></div>
+                    <div class="modal-section-info">
+                        <div class="modal-section-title">Beyond the Screen</div>
+                        <div class="modal-section-subtitle">Personal interests & hobbies</div>
+                    </div>
+                </a>
+                <a href="#connect" class="modal-section-item" data-section="connect">
+                    <div class="modal-section-dot"></div>
+                    <div class="modal-section-info">
+                        <div class="modal-section-title">Let's Connect</div>
+                        <div class="modal-section-subtitle">Get in touch for opportunities</div>
+                    </div>
+                </a>
+            </div>
+            <div class="modal-progress">
+                <div class="modal-progress-bar" id="modal-progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
     <!-- About Hero -->
-    <section class="about-hero">
+    <section id="hero" class="about-hero">
         <div class="container">
             <div class="about-hero-content">
                 <div class="hero-text">
@@ -56,19 +158,14 @@
     </section>
 
     <!-- My Story -->
-    <section class="my-story">
+    <section id="expertise" class="my-story">
         <div class="container">
             <div class="story-content">
                 <div class="story-layout">
-                    <div class="story-header">
-                        <h2 class="section-title">About My Work</h2>
-                        <p class="story-intro">Creating meaningful digital experiences through strategic design and technical expertise</p>
-                    </div>
-                    
                     <div class="work-showcase">
                         <div class="work-highlight featured">
                             <div class="work-content">
-                                <h3>Digital Design Expertise</h3>
+                                <h2 class="section-title">Digital Design Expertise</h2>
                                 <p>I am a digital designer with a strong focus on web design and user experience, supported by a versatile background across graphic and visual design. My work spans logo design, print materials, web design from wireframes through development, and social media graphics that drive engagement.</p>
                             </div>
                             <div class="work-icon">🎨</div>
@@ -106,7 +203,7 @@
     </section>
 
     <!-- Design Philosophy -->
-    <section class="design-philosophy">
+    <section id="philosophy" class="design-philosophy">
         <div class="container">
             <div class="philosophy-content">
                 <h2 class="section-title">My Design Philosophy</h2>
@@ -153,45 +250,8 @@
 
 
 
-    <!-- Personal Side -->
-    <section class="personal-side">
-        <div class="container">
-            <div class="personal-content">
-                <h2 class="section-title">Beyond the Screen</h2>
-                
-                <div class="personal-grid">
-                    <div class="personal-item">
-                        <div class="personal-icon">🐕</div>
-                        <h3>Pet Lover</h3>
-                        <p>I'm passionate about animal welfare and even built a <a href="https://meiratompkins.github.io/meira-pet-sitting/" target="_blank">pet sitting website</a> as a side project. It combines my love for pets with my design skills!</p>
-                    </div>
-                    
-                    <div class="personal-item">
-                        <div class="personal-icon">🌱</div>
-                        <h3>Lifelong Learner</h3>
-                        <p>Technology and design are constantly evolving, and I love staying on the cutting edge. I'm always exploring new tools, techniques, and trends in UX design.</p>
-                    </div>
-                    
-                    <div class="personal-item">
-                        <div class="personal-icon">✨</div>
-                        <h3>Design Enthusiast</h3>
-                        <p>I find inspiration everywhere—from beautiful architecture to cleverly designed everyday objects. Great design makes life better, and that's what motivates me every day.</p>
-                    </div>
-                    
-                    <div class="personal-item">
-                        <div class="personal-icon">🚀</div>
-                        <h3>Side Project Creator</h3>
-                        <p>I love building websites as side projects to experiment with new ideas and technologies. Each project teaches me something new that I can apply to client work.</p>
-                    </div>
-                </div>
-                
-
-            </div>
-        </div>
-    </section>
-
     <!-- Working Together -->
-    <section class="working-together">
+    <section id="collaboration" class="working-together">
         <div class="container">
             <div class="collaboration-content">
                 <h2 class="section-title">What It's Like Working With Me</h2>
@@ -231,10 +291,47 @@
         </div>
     </section>
 
+    <!-- Personal Side -->
+    <section id="beyond" class="personal-side">
+        <div class="container">
+            <div class="personal-content">
+                <h2 class="section-title">Beyond the Screen</h2>
+                
+                <div class="personal-grid">
+                    <div class="personal-item">
+                        <div class="personal-icon">🐕</div>
+                        <h3>Pet Lover</h3>
+                        <p>I'm passionate about animal welfare and even built a <a href="https://meiratompkins.github.io/meira-pet-sitting/" target="_blank">pet sitting website</a> as a side project. It combines my love for pets with my design skills!</p>
+                    </div>
+                    
+                    <div class="personal-item">
+                        <div class="personal-icon">🌱</div>
+                        <h3>Lifelong Learner</h3>
+                        <p>Technology and design are constantly evolving, and I love staying on the cutting edge. I'm always exploring new tools, techniques, and trends in UX design.</p>
+                    </div>
+                    
+                    <div class="personal-item">
+                        <div class="personal-icon">✨</div>
+                        <h3>Design Enthusiast</h3>
+                        <p>I find inspiration everywhere—from beautiful architecture to cleverly designed everyday objects. Great design makes life better, and that's what motivates me every day.</p>
+                    </div>
+                    
+                    <div class="personal-item">
+                        <div class="personal-icon">🚀</div>
+                        <h3>Side Project Creator</h3>
+                        <p>I love building websites as side projects to experiment with new ideas and technologies. Each project teaches me something new that I can apply to client work.</p>
+                    </div>
+                </div>
+                
+
+            </div>
+        </div>
+    </section>
+
 
 
     <!-- Connect CTA -->
-    <section class="connect-cta">
+    <section id="connect" class="connect-cta">
         <div class="container">
             <div class="cta-content">
                 <h2 class="cta-title">Let's Create Something Amazing Together</h2>
@@ -254,17 +351,6 @@
                         <p>Ready to improve your user experience or launch a new website? Let's talk about your goals.</p>
                         <a href="services.html" class="btn btn-secondary">View Services</a>
                     </div>
-                </div>
-                
-                <div class="contact-links">
-                    <a href="mailto:hello@meiratompkins.com" class="contact-link">
-                        <span class="contact-icon">📧</span>
-                        hello@meiratompkins.com
-                    </a>
-                    <a href="https://www.linkedin.com/in/meira-tompkins/" target="_blank" class="contact-link">
-                        <span class="contact-icon">💼</span>
-                        LinkedIn Profile
-                    </a>
                 </div>
             </div>
         </div>

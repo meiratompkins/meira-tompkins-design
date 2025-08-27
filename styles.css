@@ -70,6 +70,10 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: var(--space-sm);
 }
 
+h2 {
+    margin-bottom: 0;
+}
+
 .display-title {
     font-family: var(--font-display);
     font-size: clamp(2.5rem, 5vw, 4rem);
@@ -81,6 +85,7 @@ h1, h2, h3, h4, h5, h6 {
     font-size: clamp(2rem, 4vw, 2.5rem);
     font-weight: 600;
     color: var(--text-primary);
+    padding-bottom: var(--space-lg);
 }
 
 .section-label {
@@ -370,29 +375,9 @@ h1, h2, h3, h4, h5, h6 {
     font-family: "professor", sans-serif !important;
     text-transform: lowercase;
     overflow: visible;
-    border-right: 2px solid rgba(255, 255, 255, 0.7);
-    animation: fadeInText 3s ease-in 1s both, cursor-blink 1s infinite 4s;
 }
 
-@keyframes fadeInText {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
-@keyframes cursor-blink {
-    0%, 50% {
-        border-color: rgba(255, 255, 255, 0.7);
-    }
-    51%, 100% {
-        border-color: transparent;
-    }
-}
 
 .hero-description {
     font-size: 1.25rem;
@@ -885,11 +870,9 @@ h1, h2, h3, h4, h5, h6 {
     }
     
     .hero .title-accent {
-        animation: fadeInText 2s ease-in 0.5s both;
         overflow: visible;
         white-space: normal;
         width: auto;
-        border-right: none;
         max-width: 100%;
     }
     
