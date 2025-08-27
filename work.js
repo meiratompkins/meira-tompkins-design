@@ -216,13 +216,7 @@ function throttle(func, limit) {
 // Optimized scroll handler
 const optimizedScrollHandler = throttle(function() {
     // Handle scroll-based animations or effects here
-    const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.work-hero');
-    
-    if (hero) {
-        const parallaxSpeed = scrolled * 0.5;
-        hero.style.transform = `translateY(${parallaxSpeed}px)`;
-    }
+    // Removed parallax effect to prevent hero overlap
 }, 16); // ~60fps
 
 window.addEventListener('scroll', optimizedScrollHandler);

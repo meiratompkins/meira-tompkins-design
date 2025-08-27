@@ -164,6 +164,12 @@
 /* Section title colors for dark backgrounds */
 .personal-side .section-title {
     color: white;
+    text-align: center;
+}
+
+/* Center section titles for specific sections */
+.working-together .section-title {
+    text-align: center;
 }
 
 /* Hide on tablets and mobile */
@@ -473,13 +479,155 @@
     }
 }
 
-/* About Hero Section */
+/* Glass morphism floating animations */
+@keyframes glassFloat1 {
+    0%, 100% {
+        transform: rotate(-15deg) translateY(0px) scale(1);
+        opacity: 0.25;
+    }
+    50% {
+        transform: rotate(-12deg) translateY(-15px) scale(1.02);
+        opacity: 0.3;
+    }
+}
+
+@keyframes glassFloat2 {
+    0%, 100% {
+        transform: rotate(20deg) translateY(0px) scale(1);
+        opacity: 0.2;
+    }
+    50% {
+        transform: rotate(23deg) translateY(-10px) scale(0.98);
+        opacity: 0.25;
+    }
+}
+
+@keyframes glassFloat3 {
+    0%, 100% {
+        transform: rotate(45deg) translateY(0px) scale(1);
+        opacity: 0.15;
+    }
+    50% {
+        transform: rotate(42deg) translateY(-8px) scale(1.03);
+        opacity: 0.2;
+    }
+}
+
+@keyframes glassFloat4 {
+    0%, 100% {
+        transform: rotate(-25deg) translateY(0px) scale(1);
+        opacity: 0.2;
+    }
+    50% {
+        transform: rotate(-28deg) translateY(-12px) scale(0.97);
+        opacity: 0.25;
+    }
+}
+
+/* Scroll Animation System */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered delays for grouped elements */
+.fade-in-up.delay-100 { transition-delay: 0.1s; }
+.fade-in-up.delay-200 { transition-delay: 0.2s; }
+.fade-in-up.delay-300 { transition-delay: 0.3s; }
+.fade-in-up.delay-400 { transition-delay: 0.4s; }
+.fade-in-up.delay-500 { transition-delay: 0.5s; }
+.fade-in-up.delay-600 { transition-delay: 0.6s; }
+
+/* About Hero Section - Layered Glass Morphism */
 .about-hero {
     padding: 120px 0 var(--space-3xl);
-    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 30%, #fdf2f8 70%, #f3f4f6 100%);
     min-height: 50vh;
     display: flex;
     align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Glass morphism floating elements */
+.about-hero::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: -5%;
+    width: 300px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(15px);
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transform: rotate(-15deg);
+    z-index: 1;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    animation: glassFloat1 8s ease-in-out infinite;
+}
+
+.about-hero::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    right: -8%;
+    width: 250px;
+    height: 350px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    transform: rotate(20deg);
+    z-index: 1;
+    box-shadow: 
+        0 12px 40px rgba(0, 0, 0, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    animation: glassFloat2 10s ease-in-out infinite;
+}
+
+/* Additional floating glass elements */
+.about-hero-content::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    left: 60%;
+    width: 150px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transform: rotate(45deg);
+    z-index: 1;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.03);
+    animation: glassFloat3 6s ease-in-out infinite;
+}
+
+.about-hero-content::after {
+    content: '';
+    position: absolute;
+    bottom: -10%;
+    left: 15%;
+    width: 120px;
+    height: 160px;
+    background: rgba(251, 207, 232, 0.2);
+    backdrop-filter: blur(12px);
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    transform: rotate(-25deg);
+    z-index: 1;
+    box-shadow: 0 8px 28px rgba(251, 207, 232, 0.1);
+    animation: glassFloat4 12s ease-in-out infinite;
 }
 
 .about-hero-content {
@@ -491,6 +639,22 @@
     max-width: 800px;
     margin: 0 auto;
     padding-top: var(--space-xl);
+    position: relative;
+    z-index: 2;
+}
+
+/* Glass morphism text background panel */
+.about-hero .hero-text {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 24px;
+    padding: var(--space-2xl) var(--space-xl);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    position: relative;
+    z-index: 3;
 }
 
 .hero-text {
@@ -1496,6 +1660,14 @@
     animation: oceanWave 23s ease-in-out infinite;
     color: white;
     text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Ensure contact section elements are visible even if JS fails */
+.connect-cta .fade-in-up {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
 }
 
 @keyframes oceanWave {
@@ -1601,6 +1773,40 @@
         font-size: 28px;
         margin-top: 10px;
         margin-bottom: 10px;
+    }
+    
+    /* Adjust glass elements for mobile */
+    .about-hero::before {
+        width: 200px;
+        height: 280px;
+        left: -10%;
+        animation: none;
+    }
+    
+    .about-hero::after {
+        width: 180px;
+        height: 250px;
+        right: -12%;
+        animation: none;
+    }
+    
+    .about-hero-content::before {
+        width: 100px;
+        height: 140px;
+        left: 70%;
+        animation: none;
+    }
+    
+    .about-hero-content::after {
+        width: 80px;
+        height: 120px;
+        left: 10%;
+        animation: none;
+    }
+    
+    .about-hero .hero-text {
+        padding: var(--space-lg) var(--space-md);
+        margin: 0 var(--space-sm);
     }
     
     .work-highlight.featured {

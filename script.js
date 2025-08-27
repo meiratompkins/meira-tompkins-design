@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initThemeToggle();
     initFloatingNavigation();
     initMobileFAB();
+    initScrollTextAnimations();
+    initScrollIndicator();
 });
 
 // Navigation functionality
@@ -652,6 +654,90 @@ function initMobileFAB() {
     
     // Initial update
     updateFABAndModal();
+}
+
+// Scroll Text Animations - Working system
+function initScrollTextAnimations() {
+    // Create intersection observer for fade-in-up animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.classList.contains('visible')) {
+                // Add visible class to trigger animation
+                entry.target.classList.add('visible');
+                
+                // Stop observing this element once it's animated
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Observe all elements with fade-in-up class
+    const animateElements = document.querySelectorAll('.fade-in-up');
+    animateElements.forEach(el => {
+        if (!el.classList.contains('visible')) {
+            observer.observe(el);
+        }
+    });
+    
+    // Ensure hero elements are immediately visible on page load
+    setTimeout(() => {
+        const heroElements = document.querySelectorAll('.work-hero .fade-in-up, .services-hero .fade-in-up, .contact-hero .fade-in-up');
+        heroElements.forEach(el => {
+            if (!el.classList.contains('visible')) {
+                el.classList.add('visible');
+            }
+        });
+        
+        // Ensure contact CTA section is immediately visible
+        const contactCTA = document.querySelector('.contact-cta');
+        
+        if (contactCTA) {
+            const contactElements = contactCTA.querySelectorAll('.fade-in-up');
+            contactElements.forEach(el => {
+                if (!el.classList.contains('visible')) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+    }, 100);
+}
+
+// Helper function to check if element is in viewport
+function isElementInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+}
+
+// Scroll Indicator functionality
+function initScrollIndicator() {
+    const scrollIndicator = document.getElementById('scroll-indicator');
+    
+    if (scrollIndicator) {
+        scrollIndicator.addEventListener('click', function() {
+            // Scroll to the work preview section
+            const workPreview = document.getElementById('work-preview');
+            if (workPreview) {
+                const headerOffset = 80;
+                const elementPosition = workPreview.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    }
 }
 
 // Service Worker registration (for PWA features)

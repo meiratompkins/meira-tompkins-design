@@ -124,6 +124,7 @@ h2 {
 .btn {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     padding: 0.875rem 2rem;
     font-size: 1rem;
     font-weight: 500;
@@ -798,7 +799,284 @@ h2 {
 }
 
 .fade-in-up {
-    animation: fadeInUp 0.8s ease-out;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Delay classes for staggered animations */
+.delay-100 {
+    transition-delay: 0.1s;
+}
+
+.delay-200 {
+    transition-delay: 0.2s;
+}
+
+.delay-300 {
+    transition-delay: 0.3s;
+}
+
+.delay-400 {
+    transition-delay: 0.4s;
+}
+
+.delay-500 {
+    transition-delay: 0.5s;
+}
+
+.delay-600 {
+    transition-delay: 0.6s;
+}
+
+.delay-700 {
+    transition-delay: 0.7s;
+}
+
+/* Interior Page Heroes - Layered Glass Morphism Design */
+
+/* Base hero styles for all interior pages */
+.work-hero,
+.services-hero,
+.contact-hero {
+    padding: 120px 0 var(--space-3xl);
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Work Hero - Light Relaxed Theme */
+.work-hero {
+    background: linear-gradient(135deg, #fefefe 0%, #f8fafc 30%, #f1f5f9 70%, #f8fafc 100%);
+}
+
+/* Services Hero - Very Light Lilac Purple Theme */
+.services-hero {
+    background: linear-gradient(135deg, #fefcff 0%, #faf5ff 30%, #f3e8ff 70%, #f8f7ff 100%);
+}
+
+/* Contact Hero - Very Light Theme */
+.contact-hero {
+    background: linear-gradient(135deg, #ffffff 0%, #fafafa 30%, #f5f5f5 70%, #f0f0f0 100%);
+}
+
+/* Glass morphism floating elements for interior heroes */
+.work-hero::before,
+.services-hero::before,
+.contact-hero::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: -5%;
+    width: 300px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(15px);
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transform: rotate(-15deg);
+    z-index: 2;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    animation: glassFloat1 8s ease-in-out infinite;
+}
+
+.work-hero::after,
+.services-hero::after,
+.contact-hero::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    right: -8%;
+    width: 250px;
+    height: 350px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    transform: rotate(20deg);
+    z-index: 2;
+    box-shadow: 
+        0 12px 40px rgba(0, 0, 0, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    animation: glassFloat2 10s ease-in-out infinite;
+}
+
+/* Additional floating glass elements */
+.work-hero-content::before,
+.services-hero-content::before,
+.contact-hero-content::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    left: 60%;
+    width: 150px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transform: rotate(45deg);
+    z-index: 3;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.03);
+    animation: glassFloat3 6s ease-in-out infinite;
+}
+
+.work-hero-content::after,
+.services-hero-content::after,
+.contact-hero-content::after {
+    content: '';
+    position: absolute;
+    bottom: -10%;
+    left: 15%;
+    width: 120px;
+    height: 160px;
+    background: rgba(251, 207, 232, 0.2);
+    backdrop-filter: blur(12px);
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    transform: rotate(-25deg);
+    z-index: 3;
+    box-shadow: 0 8px 28px rgba(251, 207, 232, 0.1);
+    animation: glassFloat4 12s ease-in-out infinite;
+}
+
+/* Hero content containers */
+.work-hero-content,
+.services-hero-content,
+.contact-hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+    position: relative;
+    z-index: 4;
+    width: 100%;
+}
+
+/* Glass morphism text background panel */
+.work-hero .hero-text,
+.services-hero .hero-text,
+.contact-hero .hero-text {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 24px;
+    padding: var(--space-2xl) var(--space-xl);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    max-width: 1000px;
+}
+
+/* Hero text styling - Aligned with About page */
+.work-hero .hero-greeting,
+.services-hero .hero-greeting,
+.contact-hero .hero-greeting {
+    display: inline-block;
+    font-size: 1.125rem;
+    color: var(--accent-color);
+    font-weight: 500;
+    margin-bottom: var(--space-sm);
+}
+
+.work-hero .hero-title,
+.services-hero .hero-title,
+.contact-hero .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+    text-shadow: none;
+}
+
+.work-hero .title-accent,
+.services-hero .title-accent,
+.contact-hero .title-accent {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 40px;
+    font-weight: 500;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    line-height: 1.4;
+    max-width: 100%;
+    white-space: normal;
+    font-family: "professor", sans-serif !important;
+    text-transform: lowercase;
+    animation: none !important;
+    border-right: none !important;
+}
+
+/* Contact hero specific dark text */
+.contact-hero .hero-greeting,
+.contact-hero .hero-title,
+.contact-hero .title-accent {
+    color: var(--text-primary);
+}
+
+/* Glass morphism floating animations */
+@keyframes glassFloat1 {
+    0%, 100% {
+        transform: rotate(-15deg) translateY(0px) scale(1);
+        opacity: 0.25;
+    }
+    50% {
+        transform: rotate(-12deg) translateY(-15px) scale(1.02);
+        opacity: 0.3;
+    }
+}
+
+@keyframes glassFloat2 {
+    0%, 100% {
+        transform: rotate(20deg) translateY(0px) scale(1);
+        opacity: 0.2;
+    }
+    50% {
+        transform: rotate(23deg) translateY(-10px) scale(0.98);
+        opacity: 0.25;
+    }
+}
+
+@keyframes glassFloat3 {
+    0%, 100% {
+        transform: rotate(45deg) translateY(0px) scale(1);
+        opacity: 0.15;
+    }
+    50% {
+        transform: rotate(42deg) translateY(-8px) scale(1.03);
+        opacity: 0.2;
+    }
+}
+
+@keyframes glassFloat4 {
+    0%, 100% {
+        transform: rotate(-25deg) translateY(0px) scale(1);
+        opacity: 0.2;
+    }
+    50% {
+        transform: rotate(-28deg) translateY(-12px) scale(0.97);
+        opacity: 0.25;
+    }
 }
 
 /* Responsive Design */
@@ -920,6 +1198,30 @@ h2 {
     
     .hero {
         padding: 100px 0 var(--space-xl);
+    }
+    
+    .work-hero,
+    .services-hero,
+    .contact-hero {
+        padding: 100px 0 var(--space-xl);
+    }
+    
+    .work-hero .hero-text,
+    .services-hero .hero-text,
+    .contact-hero .hero-text {
+        padding: var(--space-xl) var(--space-lg);
+    }
+    
+    .work-hero .hero-title,
+    .services-hero .hero-title,
+    .contact-hero .hero-title {
+        font-size: clamp(2rem, 4vw, 2.5rem);
+    }
+    
+    .work-hero .title-accent,
+    .services-hero .title-accent,
+    .contact-hero .title-accent {
+        font-size: 28px;
     }
     
     .work-card {

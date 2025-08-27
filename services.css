@@ -1,49 +1,6 @@
 /* Services Page Styles */
 
-/* Services Hero */
-.services-hero {
-    padding: 120px 0 var(--space-3xl);
-    background: linear-gradient(135deg, var(--background-alt), var(--background-color));
-    text-align: center;
-}
-
-.services-hero .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--space-md);
-}
-
-.services-hero-content {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.hero-label {
-    display: inline-block;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--accent-color);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: var(--space-sm);
-}
-
-.services-title {
-    font-family: var(--font-display);
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: var(--space-md);
-    line-height: 1.2;
-    text-shadow: none;
-}
-
-.services-description {
-    font-size: 1.25rem;
-    color: var(--text-secondary);
-    line-height: 1.6;
-    margin-bottom: var(--space-xl);
-}
+/* Services Hero - Now handled by main styles.css */
 
 /* Services Grid */
 .services-grid {
@@ -54,7 +11,6 @@
 }
 
 .services-grid .container {
-    max-width: 1400px;
     margin: 0 auto;
     padding: 0 var(--space-md);
 }
@@ -62,6 +18,9 @@
 .section-header {
     text-align: center;
     margin-bottom: var(--space-3xl);
+    /* Ensure section header is always visible */
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .section-title {
@@ -70,6 +29,9 @@
     font-weight: 600;
     color: var(--text-primary);
     margin-bottom: var(--space-md);
+    /* Ensure section titles are always visible */
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .section-subtitle {
@@ -78,6 +40,9 @@
     line-height: 1.6;
     max-width: 600px;
     margin: 0 auto;
+    /* Ensure section subtitles are always visible */
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .packages-grid {
@@ -100,6 +65,7 @@
     flex-direction: column;
     flex: 1;
     min-width: 250px;
+    gap: var(--space-sm);
 }
 
 .package-card:hover {
@@ -188,14 +154,18 @@
 
 /* Package Features */
 .package-features {
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-sm);
     flex-grow: 1;
 }
 
 .package-features h4 {
     font-weight: 600;
     color: var(--text-primary);
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--space-md);
+    font-size: 13px;
+    line-height: 1.3;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .package-features ul {
@@ -204,10 +174,12 @@
 }
 
 .package-features li {
-    padding: 0.5rem 0;
+    padding: 0.4rem 0;
     color: var(--text-secondary);
     position: relative;
-    padding-left: 1.5rem;
+    padding-left: 1.25rem;
+    font-size: 12px;
+    line-height: 1.3;
 }
 
 .package-features li::before {
@@ -220,37 +192,53 @@
 
 /* Package Options */
 .package-options {
-    margin-bottom: var(--space-lg);
-    padding-top: var(--space-md);
+    margin-bottom: var(--space-sm);
+    padding-top: var(--space-sm);
     border-top: 1px solid var(--border-color);
 }
 
 .package-options h4 {
     font-weight: 600;
     color: var(--text-primary);
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--space-md);
+    font-size: 13px;
+    line-height: 1.3;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .option-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.75rem 0;
+    padding: 0.5rem 0;
     border-bottom: 1px solid var(--border-color);
+    gap: 0.75rem;
 }
 
 .option-item:last-child {
     border-bottom: none;
+    padding-bottom: 0;
 }
 
 .option-name {
     font-weight: 500;
     color: var(--text-primary);
+    font-size: 12px;
+    line-height: 1.3;
+    flex: 1;
+    min-width: 0;
+    word-break: break-word;
 }
 
 .option-price {
     font-weight: 600;
     color: var(--accent-color);
+    font-size: 12px;
+    line-height: 1.3;
+    text-align: right;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 /* Process Section */
@@ -372,6 +360,9 @@
 .services-cta .cta-content {
     max-width: 800px;
     margin: 0 auto;
+    /* Ensure services CTA is always visible */
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .services-cta .cta-title {
@@ -379,6 +370,9 @@
     font-size: clamp(2rem, 4vw, 2.5rem);
     font-weight: 600;
     margin-bottom: var(--space-md);
+    /* Ensure CTA title is always visible */
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .services-cta .cta-description {
@@ -386,6 +380,8 @@
     line-height: 1.6;
     margin-bottom: var(--space-xl);
     opacity: 0.95;
+    /* Ensure CTA description is always visible */
+    visibility: visible !important;
 }
 
 .cta-buttons {
