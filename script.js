@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initMobileFAB();
     initScrollTextAnimations();
     initScrollIndicator();
+    initFAQ();
 });
 
 // Navigation functionality
@@ -654,6 +655,37 @@ function initMobileFAB() {
     
     // Initial update
     updateFABAndModal();
+    
+    // Ensure scroll indicator is visible
+    const scrollIndicator = document.getElementById('scroll-indicator');
+    if (scrollIndicator) {
+        scrollIndicator.style.display = 'flex';
+        scrollIndicator.style.opacity = '1';
+        scrollIndicator.style.visibility = 'visible';
+    }
+    
+    // Ensure work preview elements stay visible
+    const workPreview = document.getElementById('work-preview');
+    if (workPreview) {
+        const workCards = workPreview.querySelectorAll('.work-card.fade-in-up');
+        const sectionCta = workPreview.querySelector('.section-cta .fade-in-up');
+        
+        // Force work cards to stay visible after animation
+        workCards.forEach(card => {
+            if (card.classList.contains('visible')) {
+                card.style.opacity = '1';
+                card.style.visibility = 'visible';
+                card.style.transform = 'translateY(0)';
+            }
+        });
+        
+        // Force section CTA to stay visible
+        if (sectionCta && sectionCta.classList.contains('visible')) {
+            sectionCta.style.opacity = '1';
+            sectionCta.style.visibility = 'visible';
+            sectionCta.style.transform = 'translateY(0)';
+        }
+    }
 }
 
 // Scroll Text Animations - Working system
@@ -699,9 +731,9 @@ function initScrollTextAnimations() {
         if (contactCTA) {
             const contactElements = contactCTA.querySelectorAll('.fade-in-up');
             contactElements.forEach(el => {
-                if (!el.classList.contains('visible')) {
-                    el.classList.add('visible');
-                }
+                el.classList.add('visible');
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
             });
         }
     }, 100);
@@ -737,6 +769,65 @@ function initScrollIndicator() {
                 });
             }
         });
+    }
+}
+
+// FAQ Accordion functionality
+function initFAQ() {
+    const faqItems = document.querySelectorAll('[data-faq-item]');
+    
+    faqItems.forEach(item => {
+        const header = item.querySelector('.faq-header');
+        const content = item.querySelector('.faq-content');
+        
+        if (!header || !content) return;
+        
+        // Handle click events
+        header.addEventListener('click', function() {
+            const isActive = item.classList.contains('active');
+            
+            // Close all other FAQ items
+            faqItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('active');
+                    const otherHeader = otherItem.querySelector('.faq-header');
+                    const otherContent = otherItem.querySelector('.faq-content');
+                    if (otherHeader) otherHeader.setAttribute('aria-expanded', 'false');
+                }
+            });
+            
+            // Toggle current item
+            if (isActive) {
+                item.classList.remove('active');
+                header.setAttribute('aria-expanded', 'false');
+            } else {
+                item.classList.add('active');
+                header.setAttribute('aria-expanded', 'true');
+            }
+        });
+        
+        // Handle keyboard events for accessibility
+        header.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                header.click();
+            }
+        });
+        
+        // Handle Enter key on the entire header
+        header.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                header.click();
+            }
+        });
+    });
+    
+    // Optional: Auto-open first FAQ item on page load
+    if (faqItems.length > 0) {
+        // Uncomment the line below if you want the first FAQ to be open by default
+        // faqItems[0].classList.add('active');
+        // faqItems[0].querySelector('.faq-header').setAttribute('aria-expanded', 'true');
     }
 }
 
