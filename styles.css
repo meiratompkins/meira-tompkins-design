@@ -85,7 +85,8 @@ h2 {
     font-size: clamp(2rem, 4vw, 2.5rem);
     font-weight: 600;
     color: var(--text-primary);
-    padding-bottom: var(--space-lg);
+    padding-bottom: 0;
+    margin-bottom: var(--space-md);
 }
 
 .section-label {

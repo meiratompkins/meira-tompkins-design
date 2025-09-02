@@ -1411,9 +1411,7 @@
 .personal-grid {
     display: flex;
     gap: 20px;
-    margin-bottom: var(--space-3xl);
     justify-content: center;
-    flex-wrap: wrap;
     position: relative;
 }
 
@@ -1704,7 +1702,6 @@
 .cta-description {
     font-size: 1.25rem;
     opacity: 0.9;
-    margin-bottom: var(--space-3xl);
     line-height: 1.6;
 }
 
