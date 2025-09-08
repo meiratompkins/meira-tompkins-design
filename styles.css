@@ -577,6 +577,17 @@ h2 {
     overflow: hidden;
 }
 
+.work-project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.work-card:hover .work-project-image {
+    transform: scale(1.05);
+}
+
 .image-placeholder {
     width: 100%;
     height: 100%;
