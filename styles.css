@@ -1498,6 +1498,12 @@ h2 {
         max-width: 300px;
         justify-content: center;
     }
+    
+    .cta-title {
+        font-size: clamp(1.5rem, 3vw, 2rem);
+        line-height: 1.2;
+        word-wrap: break-word;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1577,6 +1583,11 @@ h2 {
     body {
         font-size: 12pt;
         line-height: 1.4;
+    }
+    
+    .cta-title {
+        font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+        line-height: 1.1;
     }
 }
 

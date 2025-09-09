@@ -4,6 +4,31 @@
 
 /* Hero styles now handled by main styles.css */
 
+/* Coming Soon Tag */
+.coming-soon-tag {
+    display: inline-block;
+    background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.5rem;
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
 /* Filter Section */
 .filter-section {
     padding: var(--space-xl) 0;
@@ -58,7 +83,7 @@
 
 .portfolio-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: var(--space-3xl);
     max-width: 1400px;
     margin: 0 auto;
@@ -371,6 +396,7 @@
     flex-wrap: nowrap;
     gap: var(--space-xl);
     justify-content: center;
+    align-items: stretch;
 }
 
 .approach-item {
@@ -540,6 +566,7 @@
     .portfolio-grid {
         grid-template-columns: 1fr;
         gap: var(--space-xl);
+        padding: 0 var(--space-sm);
     }
     
     .portfolio-image {
@@ -561,8 +588,15 @@
     }
     
     .approach-grid {
-        grid-template-columns: 1fr;
+        flex-direction: column;
         gap: var(--space-lg);
+        align-items: center;
+    }
+    
+    .cta-title {
+        font-size: clamp(1.5rem, 3vw, 2rem);
+        line-height: 1.2;
+        word-wrap: break-word;
     }
     
     .work-cta .cta-buttons {
@@ -578,7 +612,7 @@
 
 @media (max-width: 480px) {
     .portfolio-grid {
-        padding: 0 var(--space-sm);
+        padding: 0 var(--space-xs);
         gap: var(--space-lg);
     }
     
@@ -596,6 +630,40 @@
     
     .approach-item {
         padding: var(--space-lg);
+    }
+    
+    .portfolio-image {
+        height: 200px;
+    }
+    
+    .project-title {
+        font-size: 1.25rem;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 360px) {
+    .portfolio-grid {
+        padding: 0 var(--space-xs);
+        gap: var(--space-md);
+    }
+    
+    .portfolio-content {
+        padding: var(--space-sm);
+    }
+    
+    .project-title {
+        font-size: 1.125rem;
+    }
+    
+    .filter-btn {
+        padding: var(--space-xs) var(--space-sm);
+        font-size: 0.7rem;
+    }
+    
+    .cta-title {
+        font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+        line-height: 1.1;
     }
 }
 
