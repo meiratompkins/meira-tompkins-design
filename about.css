@@ -1816,7 +1816,7 @@
 
     
     .work-highlight.featured .work-content p {
-        font-size: 1.125rem;
+        font-size: 1rem;
     }
     
     .work-highlight.featured .work-icon {
@@ -1911,6 +1911,10 @@
     .principle,
     .collaboration-item {
         padding: var(--space-lg);
+    }
+    
+    .work-highlight.featured .work-content p {
+        font-size: 0.9rem;
     }
     
     .principle {

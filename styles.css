@@ -355,7 +355,7 @@ h2 {
 
 .hero-title {
     font-family: 'Raleway', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
     font-weight: 700;
     line-height: 1.1;
     color: white;
@@ -363,7 +363,7 @@ h2 {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     text-transform: uppercase;
     letter-spacing: 0.02em;
-    white-space: nowrap;
+    white-space: normal;
 }
 
 .hero .title-accent {
@@ -860,6 +860,7 @@ h2 {
     font-size: clamp(2rem, 4vw, 2.5rem);
     font-weight: 600;
     margin-bottom: var(--space-lg);
+    white-space: nowrap;
 }
 
 .cta-description {
@@ -1409,6 +1410,29 @@ h2 {
         grid-template-columns: 1fr;
         text-align: center;
         gap: var(--space-xl);
+        padding: 0 var(--space-sm);
+    }
+    
+    .hero-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        white-space: normal;
+        line-height: 1.2;
+    }
+    
+    .hero .title-accent {
+        font-size: clamp(1.5rem, 3vw, 2rem);
+        line-height: 1.3;
+    }
+    
+    .hero-cta {
+        flex-direction: column;
+        gap: var(--space-sm);
+        align-items: center;
+    }
+    
+    .hero-cta .btn {
+        width: 100%;
+        max-width: 280px;
     }
     
     .hero-visual {
@@ -1503,6 +1527,7 @@ h2 {
         font-size: clamp(1.5rem, 3vw, 2rem);
         line-height: 1.2;
         word-wrap: break-word;
+        white-space: normal;
     }
 }
 
@@ -1530,6 +1555,21 @@ h2 {
     
     .hero {
         padding: 100px 0 var(--space-xl);
+        min-height: calc(100vh - 80px);
+    }
+    
+    .hero-container {
+        padding: 0 var(--space-xs);
+    }
+    
+    .hero-title {
+        font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+        line-height: 1.1;
+    }
+    
+    .hero .title-accent {
+        font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+        line-height: 1.2;
     }
     
     .work-hero,
@@ -1576,8 +1616,8 @@ h2 {
     }
     
     .hero {
-        min-height: auto;
-        padding: var(--space-lg) 0;
+        min-height: calc(100vh - 80px);
+        padding: 100px 0 var(--space-lg);
     }
     
     body {
@@ -1588,6 +1628,7 @@ h2 {
     .cta-title {
         font-size: clamp(1.25rem, 2.5vw, 1.75rem);
         line-height: 1.1;
+        white-space: normal;
     }
 }
 

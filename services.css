@@ -68,6 +68,13 @@
     gap: var(--space-sm);
 }
 
+.package-card .btn {
+    align-self: center;
+    margin-top: auto;
+    width: 100%;
+    max-width: 200px;
+}
+
 .package-card:hover {
     transform: translateY(-8px);
     box-shadow: var(--shadow-large);
@@ -273,16 +280,13 @@
 
 .timeline-steps {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     gap: var(--space-xl);
     align-items: flex-start;
     justify-content: center;
     position: relative;
     z-index: 2;
     padding: var(--space-lg) var(--space-md) var(--space-2xl) var(--space-md);
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
 }
 
 .timeline-steps::-webkit-scrollbar {
@@ -456,13 +460,17 @@
     }
     
     .timeline-steps {
+        flex-direction: column;
         gap: var(--space-lg);
         padding: 0 var(--space-sm) var(--space-xl) var(--space-sm);
+        align-items: center;
     }
     
     .timeline-step {
-        flex: 0 0 260px;
-        min-width: 260px;
+        flex: none;
+        width: 100%;
+        max-width: 400px;
+        min-width: auto;
     }
     
     .step-indicator {
@@ -486,11 +494,25 @@
 
 @media (max-width: 480px) {
     .timeline-steps {
-        padding: 0;
+        padding: 0 var(--space-xs);
+        gap: var(--space-md);
+    }
+    
+    .timeline-step {
+        max-width: 100%;
     }
     
     .step-content {
         padding: var(--space-md);
+    }
+    
+    .step-indicator {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .step-number {
+        font-size: 1.25rem;
     }
 }
 
