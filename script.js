@@ -725,6 +725,39 @@ function initScrollTextAnimations() {
             }
         });
         
+        // Ensure contact section elements are immediately visible
+        const contactSection = document.querySelector('.contact-section');
+        if (contactSection) {
+            const contactElements = contactSection.querySelectorAll('.fade-in-up');
+            contactElements.forEach(el => {
+                el.classList.add('visible');
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            });
+        }
+        
+        // Ensure expectations section elements are immediately visible
+        const expectationsSection = document.querySelector('.expectations-section');
+        if (expectationsSection) {
+            const expectationsElements = expectationsSection.querySelectorAll('.fade-in-up');
+            expectationsElements.forEach(el => {
+                el.classList.add('visible');
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            });
+        }
+        
+        // Ensure FAQ section elements are immediately visible
+        const faqSection = document.querySelector('.faq-section');
+        if (faqSection) {
+            const faqElements = faqSection.querySelectorAll('.fade-in-up');
+            faqElements.forEach(el => {
+                el.classList.add('visible');
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            });
+        }
+        
         // Ensure contact CTA section is immediately visible
         const contactCTA = document.querySelector('.contact-cta');
         
