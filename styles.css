@@ -461,7 +461,7 @@ h2 {
 
 .scroll-indicator {
     position: absolute !important;
-    bottom: var(--space-xl) !important;
+    bottom: 20px !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
     display: flex !important;
@@ -1507,15 +1507,22 @@ h2 {
 }
 
 .benefit-icon {
-    font-size: 1.5rem;
-    width: 40px;
-    height: 40px;
+    font-size: 2rem;
+    width: 50px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, var(--accent-color), var(--accent-light));
-    border-radius: 8px;
+    border-radius: 10px;
     flex-shrink: 0;
+}
+
+.benefit-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
 }
 
 .benefit-content h4 {
@@ -1976,8 +1983,8 @@ h2 {
     }
     
     .hero {
-        padding: 100px 0 var(--space-xl);
-        min-height: 65vh;
+        padding: 135px 0 80px;
+        min-height: 75vh;
     }
     
     .hero-container {
