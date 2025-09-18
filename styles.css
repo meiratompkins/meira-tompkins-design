@@ -1378,26 +1378,30 @@ h2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-3xl);
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 0 var(--space-md);
-    align-items: start;
+    align-items: stretch;
 }
 
 .contact-info {
-    padding-right: var(--space-lg);
+    text-align: left;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: space-between;
-    min-height: 100%;
+    justify-content: flex-start;
+}
+
+.contact-info .section-title {
+    font-size: clamp(1.75rem, 3vw, 2rem);
+    margin-bottom: var(--space-md);
 }
 
 .contact-description {
-    font-size: 1.125rem;
+    font-size: 1rem;
     color: var(--text-secondary);
-    margin-bottom: var(--space-xl);
-    line-height: 1.7;
+    margin-bottom: var(--space-lg);
+    line-height: 1.6;
 }
 
 /* Contact Methods */
@@ -1405,7 +1409,8 @@ h2 {
     display: flex;
     flex-direction: column;
     gap: var(--space-lg);
-    align-items: center;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 
 .contact-method {
@@ -1590,17 +1595,25 @@ h2 {
     border-radius: 20px;
     box-shadow: var(--shadow-light);
     border: 1px solid var(--border-color);
+    width: 100%;
+    max-width: 1000px;
+    margin: var(--space-3xl) auto 0;
 }
 
 .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-lg);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+    align-items: start;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
+}
+
+.form-group-full {
+    grid-column: 1 / -1;
 }
 
 .form-group label {
@@ -1613,10 +1626,10 @@ h2 {
 .form-group input,
 .form-group select,
 .form-group textarea {
-    padding: var(--space-md);
+    padding: var(--space-sm);
     border: 2px solid var(--border-color);
-    border-radius: 12px;
-    font-size: 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
     font-family: var(--font-primary);
     background: var(--background-color);
     color: var(--text-primary);
@@ -1633,8 +1646,8 @@ h2 {
 
 .form-group textarea {
     resize: vertical;
-    min-height: 120px;
-    line-height: 1.6;
+    min-height: 80px;
+    line-height: 1.5;
 }
 
 .form-group select {
@@ -1645,6 +1658,27 @@ h2 {
     background-size: 16px;
     padding-right: 40px;
     appearance: none;
+}
+
+/* Form Success/Error Messages */
+.form-success {
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+    padding: var(--space-md);
+    border-radius: 8px;
+    margin-top: var(--space-md);
+    text-align: center;
+}
+
+.form-error {
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    padding: var(--space-md);
+    border-radius: 8px;
+    margin-top: var(--space-md);
+    text-align: center;
 }
 
 /* Expectations Section */
@@ -1766,6 +1800,18 @@ h2 {
 }
 
 /* Responsive Design */
+@media (max-width: 1024px) {
+    /* Tablet Styles */
+    .contact-content {
+        gap: var(--space-xl);
+        padding: 0 var(--space-md);
+    }
+    
+    .contact-form-container {
+        max-width: 900px;
+    }
+}
+
 @media (max-width: 768px) {
     :root {
         --space-md: 1rem;
@@ -1946,6 +1992,32 @@ h2 {
 }
 
 @media (max-width: 480px) {
+    /* Small Mobile Styles */
+    .contact-content {
+        padding: 0 var(--space-xs);
+        gap: var(--space-lg);
+    }
+    
+    .contact-info .section-title {
+        font-size: clamp(1.25rem, 5vw, 1.5rem);
+    }
+    
+    .contact-description {
+        font-size: 0.9rem;
+    }
+    
+    .contact-method {
+        padding: var(--space-md);
+    }
+    
+    .contact-form-container {
+        padding: var(--space-md);
+        margin: var(--space-lg) auto 0;
+    }
+    
+    .contact-form {
+        gap: var(--space-xs);
+    }
     .container {
         padding: 0 var(--space-sm);
     }
@@ -2039,11 +2111,22 @@ h2 {
     .contact-content {
         grid-template-columns: 1fr;
         gap: var(--space-2xl);
+        padding: 0 var(--space-sm);
     }
     
     .contact-info {
         padding-right: 0;
         text-align: center;
+        align-items: center;
+    }
+    
+    .contact-info .section-title {
+        font-size: clamp(1.5rem, 4vw, 1.75rem);
+    }
+    
+    .contact-description {
+        font-size: 0.95rem;
+        margin-bottom: var(--space-md);
     }
     
     .contact-methods {
@@ -2075,7 +2158,8 @@ h2 {
     }
     
     .contact-form {
-        gap: var(--space-md);
+        grid-template-columns: 1fr;
+        gap: var(--space-sm);
     }
     
     .form-group input,
