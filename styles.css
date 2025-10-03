@@ -1446,11 +1446,12 @@ h2 {
 }
 
 .method-content {
-    text-align: center;
+    text-align: left;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
+    height: 100%;
 }
 
 .method-content h3 {
