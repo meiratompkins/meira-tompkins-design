@@ -7,6 +7,23 @@
     <meta name="description" content="Get in touch with Meira Tompkins for web design, UX design, and digital strategy projects. Let's create something amazing together.">
     <link rel="canonical" href="https://meiratompkins.com/contact.html">
     
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://meiratompkins.com/contact.html">
+    <meta property="og:title" content="Contact - Meira Tompkins Portfolio">
+    <meta property="og:description" content="Get in touch with Meira Tompkins for web design, UX design, and digital strategy projects. Let's create something amazing together.">
+    <meta property="og:image" content="https://meiratompkins.com/Meira-Tompkins-TypeMark-05.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Meira Tompkins Design">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://meiratompkins.com/contact.html">
+    <meta property="twitter:title" content="Contact - Meira Tompkins Portfolio">
+    <meta property="twitter:description" content="Get in touch with Meira Tompkins for web design, UX design, and digital strategy projects. Let's create something amazing together.">
+    <meta property="twitter:image" content="https://meiratompkins.com/Meira-Tompkins-TypeMark-05.png">
+    
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon.svg">
@@ -22,13 +39,16 @@
     <link rel="stylesheet" href="styles.css">
     
     <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XYSFTPF220"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'GA_MEASUREMENT_ID');
+        gtag('config', 'G-XYSFTPF220');
     </script>
+    
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -95,10 +115,7 @@
             </div>
             
             <div class="contact-form-container fade-in-up delay-300">
-                    <form class="contact-form" id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-                        <input type="hidden" name="_replyto" value="contact@meiratompkins.com">
-                        <input type="hidden" name="_subject" value="New Contact Form Submission from Portfolio">
-                        <input type="hidden" name="_next" value="https://meiratompkins.com/contact.html?success=true">
+                    <form class="contact-form" id="contact-form">
                         
                         <div class="form-group">
                             <label for="name">Name *</label>
@@ -250,21 +267,80 @@
     <!-- JavaScript -->
     <script src="script.js"></script>
     
-    <!-- Form Success Handler -->
+    <!-- EmailJS Configuration and Form Handler -->
     <script>
-        // Check if form was submitted successfully
+        // Initialize EmailJS with your public key
+        (function() {
+            emailjs.init("PrGCTp9t_LweTGpR-");
+        })();
+
+        // Handle form submission
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                company: document.getElementById('company').value,
+                project_type: document.getElementById('project-type').value,
+                budget: document.getElementById('budget').value,
+                timeline: document.getElementById('timeline').value,
+                message: document.getElementById('message').value,
+                submission_date: new Date().toLocaleDateString(),
+                submission_time: new Date().toLocaleTimeString()
+            };
+
+            // Show loading state
+            const submitBtn = document.querySelector('.btn-primary');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+
+            // Send confirmation email to client
+            emailjs.send('service_p2ct36r', 'template_9og2kyq', formData)
+                .then(function(response) {
+                    console.log('Client confirmation sent:', response.status, response.text);
+                    
+                    // Send notification email to you
+                    return emailjs.send('service_p2ct36r', 'template_lqgptrj', formData);
+                })
+                .then(function(response) {
+                    console.log('Designer notification sent:', response.status, response.text);
+                    
+                    // Show success message
+                    document.getElementById('form-success').style.display = 'block';
+                    document.getElementById('form-error').style.display = 'none';
+                    
+                    // Reset form
+                    document.getElementById('contact-form').reset();
+                    
+                    // Scroll to success message
+                    document.getElementById('form-success').scrollIntoView({ behavior: 'smooth' });
+                })
+                .catch(function(error) {
+                    console.error('EmailJS Error:', error);
+                    
+                    // Show error message
+                    document.getElementById('form-error').style.display = 'block';
+                    document.getElementById('form-success').style.display = 'none';
+                    
+                    // Scroll to error message
+                    document.getElementById('form-error').scrollIntoView({ behavior: 'smooth' });
+                })
+                .finally(function() {
+                    // Reset button state
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                });
+        });
+
+        // Check if form was submitted successfully (for backward compatibility)
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('success') === 'true') {
             document.getElementById('form-success').style.display = 'block';
-            // Scroll to success message
             document.getElementById('form-success').scrollIntoView({ behavior: 'smooth' });
         }
-        
-        // Handle form submission
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            // Form will be submitted to Formspree
-            // Success/error handling is done via URL parameters
-        });
     </script>
 </body>
 </html>
