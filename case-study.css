@@ -1546,6 +1546,43 @@
     color: white;
 }
 
+/* Case Study Links */
+.case-links {
+    display: flex;
+    gap: var(--space-sm);
+    margin: var(--space-lg) 0;
+    flex-wrap: nowrap;
+}
+
+.case-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: var(--accent-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.8rem;
+    transition: all var(--transition-normal);
+    border: 2px solid var(--accent-color);
+    white-space: nowrap;
+}
+
+.case-link:hover {
+    background-color: transparent;
+    color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+}
+
+.case-link::after {
+    content: '↗';
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     /* Hero Section */
@@ -1565,6 +1602,17 @@
     
     .case-subtitle {
         font-size: 1.125rem;
+    }
+    
+    .case-links {
+        justify-content: center;
+        gap: var(--space-xs);
+        flex-wrap: wrap;
+    }
+    
+    .case-link {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.8rem;
     }
     
     .case-details {
