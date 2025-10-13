@@ -49,6 +49,9 @@
     
     <!-- EmailJS SDK -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
+    <!-- Google reCAPTCHA v3 -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6LcbJOkrAAAAAA0Ai5AnpGtOF-B2AV5f3YuVVt_z"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -173,6 +176,12 @@
                             <textarea id="message" name="message" rows="6" placeholder="Tell me about your project, goals, and any specific requirements..." required></textarea>
                         </div>
                         
+                        <!-- Honeypot field - hidden from users but visible to bots -->
+                        <div style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;" aria-hidden="true">
+                            <label for="website">Website (leave blank):</label>
+                            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                        </div>
+                        
                         <button type="submit" class="btn btn-primary form-group-full">Send Message</button>
                         
                         <!-- Success Message (hidden by default) -->
@@ -277,61 +286,78 @@
         document.getElementById('contact-form').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Get form data
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                company: document.getElementById('company').value,
-                project_type: document.getElementById('project-type').value,
-                budget: document.getElementById('budget').value,
-                timeline: document.getElementById('timeline').value,
-                message: document.getElementById('message').value,
-                submission_date: new Date().toLocaleDateString(),
-                submission_time: new Date().toLocaleTimeString()
-            };
-
+            // Check honeypot field first
+            const honeypot = document.getElementById('website').value;
+            if (honeypot !== '') {
+                console.log('Bot detected via honeypot');
+                return; // Silently reject - don't show error to bot
+            }
+            
             // Show loading state
             const submitBtn = document.querySelector('.btn-primary');
             const originalText = submitBtn.textContent;
             submitBtn.textContent = 'Sending...';
             submitBtn.disabled = true;
-
-            // Send confirmation email to client
-            emailjs.send('service_p2ct36r', 'template_9og2kyq', formData)
-                .then(function(response) {
-                    console.log('Client confirmation sent:', response.status, response.text);
+            
+            // Get reCAPTCHA token
+            grecaptcha.ready(function() {
+                grecaptcha.execute('6LcbJOkrAAAAAA0Ai5AnpGtOF-B2AV5f3YuVVt_z', {action: 'contact_form'}).then(function(token) {
+                    // Get form data
+                    const formData = {
+                        name: document.getElementById('name').value,
+                        email: document.getElementById('email').value,
+                        company: document.getElementById('company').value,
+                        project_type: document.getElementById('project-type').value,
+                        budget: document.getElementById('budget').value,
+                        timeline: document.getElementById('timeline').value,
+                        message: document.getElementById('message').value,
+                        submission_date: new Date().toLocaleDateString(),
+                        submission_time: new Date().toLocaleTimeString(),
+                        recaptcha_token: token
+                    };
                     
-                    // Send notification email to you
-                    return emailjs.send('service_p2ct36r', 'template_lqgptrj', formData);
-                })
-                .then(function(response) {
-                    console.log('Designer notification sent:', response.status, response.text);
+                    // Send form data to your backend for reCAPTCHA verification
+                    // For now, we'll proceed with sending the email
+                    // In production, you should verify the token on your server
                     
-                    // Show success message
-                    document.getElementById('form-success').style.display = 'block';
-                    document.getElementById('form-error').style.display = 'none';
-                    
-                    // Reset form
-                    document.getElementById('contact-form').reset();
-                    
-                    // Scroll to success message
-                    document.getElementById('form-success').scrollIntoView({ behavior: 'smooth' });
-                })
-                .catch(function(error) {
-                    console.error('EmailJS Error:', error);
-                    
-                    // Show error message
-                    document.getElementById('form-error').style.display = 'block';
-                    document.getElementById('form-success').style.display = 'none';
-                    
-                    // Scroll to error message
-                    document.getElementById('form-error').scrollIntoView({ behavior: 'smooth' });
-                })
-                .finally(function() {
-                    // Reset button state
-                    submitBtn.textContent = originalText;
-                    submitBtn.disabled = false;
+                    // Send confirmation email to client
+                    emailjs.send('service_p2ct36r', 'template_9og2kyq', formData)
+                        .then(function(response) {
+                            console.log('Client confirmation sent:', response.status, response.text);
+                            
+                            // Send notification email to you
+                            return emailjs.send('service_p2ct36r', 'template_lqgptrj', formData);
+                        })
+                        .then(function(response) {
+                            console.log('Designer notification sent:', response.status, response.text);
+                            
+                            // Show success message
+                            document.getElementById('form-success').style.display = 'block';
+                            document.getElementById('form-error').style.display = 'none';
+                            
+                            // Reset form
+                            document.getElementById('contact-form').reset();
+                            
+                            // Scroll to success message
+                            document.getElementById('form-success').scrollIntoView({ behavior: 'smooth' });
+                        })
+                        .catch(function(error) {
+                            console.error('EmailJS Error:', error);
+                            
+                            // Show error message
+                            document.getElementById('form-error').style.display = 'block';
+                            document.getElementById('form-success').style.display = 'none';
+                            
+                            // Scroll to error message
+                            document.getElementById('form-error').scrollIntoView({ behavior: 'smooth' });
+                        })
+                        .finally(function() {
+                            // Reset button state
+                            submitBtn.textContent = originalText;
+                            submitBtn.disabled = false;
+                        });
                 });
+            });
         });
 
         // Check if form was submitted successfully (for backward compatibility)
