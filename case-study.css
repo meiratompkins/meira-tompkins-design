@@ -82,6 +82,28 @@
     margin-top: 0;
 }
 
+.case-details.case-details--wide {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0;
+    width: fit-content;
+    margin-right: auto;
+}
+
+.case-details.case-details--wide .detail-group {
+    min-width: 160px;
+    padding-right: 1rem;
+}
+
+.case-hero--riverbrook .case-title {
+    font-size: 55px;
+    line-height: 1.05;
+}
+
+.case-hero--riverbrook .hero-mockup {
+    max-width: 650px;
+}
+
 .detail-group h3 {
     font-size: 0.875rem;
     font-weight: 600;
@@ -108,7 +130,7 @@
 /* Hero Mockups */
 .hero-mockup {
     width: 100%;
-    max-width: 600px;
+    max-width: 650px;
     position: relative;
     box-shadow: var(--shadow-large);
     border-radius: 16px;
@@ -120,6 +142,10 @@
     height: auto;
     display: block;
     border-radius: 16px;
+}
+
+.case-hero--riverbrook .hero-mockup img {
+    width: 120%;
 }
 
 .hero-mockup-image {
@@ -429,23 +455,6 @@
 }
 
 /* Research Content */
-.research-content {
-    display: grid;
-    gap: var(--space-3xl);
-}
-
-.research-item h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: var(--space-md);
-}
-
-.research-item p {
-    color: var(--text-secondary);
-    line-height: 1.6;
-    margin-bottom: var(--space-lg);
-}
 
 /* Insight Cards */
 .insight-cards {
@@ -685,7 +694,7 @@
 /* Process Steps */
 .process-steps {
     display: grid;
-    gap: var(--space-3xl);
+    gap: var(--space-2xl);
 }
 
 .process-step {
@@ -728,6 +737,14 @@
     padding: var(--space-lg);
     border-radius: 12px;
     border: 1px solid var(--border-color);
+}
+
+.process-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    box-shadow: var(--shadow-medium);
 }
 
 .sitemap {
@@ -903,6 +920,16 @@
 .browser-content {
     padding: var(--space-lg);
     min-height: 200px;
+}
+
+.browser-content-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.browser-content-image.stacked {
+    margin-top: var(--space-md);
 }
 
 /* Portfolio Preview */
@@ -1584,6 +1611,28 @@
 }
 
 /* Responsive Design */
+@media (max-width: 1060px) {
+    /* Riverbrook Hero - Stack earlier to prevent image from getting too small */
+    .case-hero--riverbrook .container {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--space-xl);
+    }
+    
+    .case-hero--riverbrook .case-hero-visual {
+        order: -1;
+    }
+    
+    .case-hero--riverbrook .hero-mockup {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .case-hero--riverbrook .hero-mockup img {
+        width: 100%;
+    }
+}
+
 @media (max-width: 768px) {
     /* Hero Section */
     .case-hero .container {
@@ -1598,6 +1647,14 @@
     
     .case-title {
         font-size: clamp(2rem, 4vw, 2.5rem);
+    }
+
+    .case-hero--riverbrook .case-title {
+        font-size: clamp(2.25rem, 6vw, 2.8rem);
+    }
+
+    .case-hero--riverbrook .hero-mockup {
+        max-width: 520px;
     }
     
     .case-subtitle {
@@ -1620,6 +1677,23 @@
         gap: var(--space-md);
     }
     
+    .case-details.case-details--wide {
+        display: block;
+        width: 100%;
+        padding-left: 0;
+    }
+
+    .case-details.case-details--wide .detail-group {
+        display: block;
+        min-width: auto;
+        padding-right: 0;
+        margin-bottom: var(--space-md);
+    }
+    
+    .case-details.case-details--wide .detail-group:last-child {
+        margin-bottom: 0;
+    }
+
     /* Project Overview */
     .overview-grid {
         grid-template-columns: 1fr;
