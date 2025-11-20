@@ -239,7 +239,7 @@
 
 .solution-details {
     display: grid;
-    gap: var(--space-3xl);
+    /* gap: var(--space-3xl); */
 }
 
 .solution-intro {
@@ -1347,6 +1347,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: var(--space-lg);
+    margin-top: 40px;
 }
 
 .deliverable-card {
